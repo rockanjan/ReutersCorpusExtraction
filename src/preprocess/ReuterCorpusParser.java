@@ -40,7 +40,7 @@ public class ReuterCorpusParser extends DefaultHandler{
 			throws SAXException {
 		if(elementName.equals("p")) {
 			Paragraph p = new Paragraph();
-			p.rawText = tmpString;
+			p.setRawText(tmpString);
 			text.paragraphs.add(p);
 			tmpString = "";
 			isParagraphStarted = false;

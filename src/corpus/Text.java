@@ -13,8 +13,10 @@ public class Text {
 	public String getRawText() {
 		StringBuffer sb = new StringBuffer();
 		for(int i=0; i<paragraphs.size(); i++) {
-			sb.append(paragraphs.get(i).rawText);
-			sb.append("\n");
+			if(paragraphs.get(i).resemblesRealSentence()) {
+				sb.append(paragraphs.get(i).getRawText());
+				sb.append("\n");
+			}
 		}
 		return sb.toString();
 	}
