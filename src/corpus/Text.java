@@ -9,4 +9,13 @@ public class Text {
 	public Text() {
 		paragraphs = new ArrayList<Paragraph>();
 	}
+	
+	public String getRawText() {
+		StringBuffer sb = new StringBuffer();
+		for(int i=0; i<paragraphs.size(); i++) {
+			sb.append(paragraphs.get(i).rawText);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
 }
