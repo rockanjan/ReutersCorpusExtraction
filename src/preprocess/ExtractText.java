@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -20,10 +21,13 @@ import corpus.Text;
 public class ExtractText {
 	public static final String REUTER_LOCATION = "/data/REUTERS_CORPUS_1/";
 	public static final String TEST_LOCATION = "/data/test/";
-	public static final String OUT_LOCATION = "/data/out/";
+	public static String OUT_LOCATION = "/data/out/";
 	public static void main(String[] args) throws SAXException, IOException {
+		Date startTime = new Date(); 
+		System.out.println("Start Time = " + startTime);
+		
 		Corpus corpus = new Corpus();
-		File folder = new File(TEST_LOCATION);
+		File folder = new File(REUTER_LOCATION);
 		File[] listOfFiles = folder.listFiles();
 		for (int i = 0; i < listOfFiles.length; i++) {
 			if (listOfFiles[i].isFile()) {
@@ -52,11 +56,23 @@ public class ExtractText {
 		}
 		
 		//write plain text
+		//if OUT_LOCATION folder does not exist, create it
+		File outFolder = new File(OUT_LOCATION);
+		if( ! outFolder.exists() ) {
+			outFolder.mkdir();
+		}
+		if(outFolder.isFile() || !outFolder.canWrite()) {
+			System.out.println("Saving at /tmp");
+			OUT_LOCATION = "/tmp/";
+		}
 		String outFile = OUT_LOCATION + "corpus.txt";
 		PrintWriter pw = new PrintWriter(outFile);
 		pw.print(corpus.getRawText());
 		pw.close();
 		System.out.println("File written at : " + outFile);
+		Date endTime= new Date();
+		System.out.println("EndTime = " + endTime);
+		System.out.println("Total Time taken : " + ( (endTime.getTime() - startTime.getTime())/1000/60) + " minutes" ); 
 	}
 
 }
