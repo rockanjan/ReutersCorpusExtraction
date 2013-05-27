@@ -46,6 +46,24 @@ public class Paragraph {
 		return false;
 	}
 	
+	public boolean resemblesTableHeaders() {
+		int THRESHOLD = 5;
+		//simple heuristic: if numberOfTokens/numberOfLines < THRESHOLD, it resembles table headers
+		System.out.println(rawText);
+		int numberOfTokens = rawText.split("(\n|\\s+)").length;
+		int numberOfLines = rawText.split("\n").length;
+		//System.out.format("#tokens = %d, #lines = %d\n", numberOfTokens, numberOfLines);
+		if(numberOfLines == 0) {
+			return false;
+		}
+		if( 1.0 * numberOfTokens / numberOfLines < THRESHOLD) {
+			System.out.println("HEADER:");
+			System.out.println(rawText);
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public static void main(String[] args) {
 		Paragraph.debug = true;
@@ -56,6 +74,8 @@ public class Paragraph {
 				"\"You have a continuing decline in inflation, a stronger-than-expected GDP growth figure " +
 				"and the lack of any upward move in U.S. rates.\"";
 		
-		System.out.println(p.resemblesRealSentence());
+		p.rawText = "Thi is \n a test";
+		//System.out.println(p.resemblesRealSentence());
+		p.resemblesTableHeaders();
 	}
 }
