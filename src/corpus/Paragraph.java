@@ -55,7 +55,6 @@ public class Paragraph implements Serializable {
 	}
 	
 	//aggressive: 
-	
 	public boolean passesAgressiveCleaning() {
 		boolean passes = true;
 		int THRESHOLD = 5;
@@ -96,6 +95,9 @@ public class Paragraph implements Serializable {
 				"and the lack of any upward move in U.S. rates.\"";
 		p.rawText = "b) Future of Community policy on state aid in connection with the situation regarding ratifications of the OECD Aereement.";
 		System.out.println(p.passesAgressiveCleaning());
+		//System.out.println(p.resemblesRealSentence());
+		
+		p.rawText = "Thi is \n a test";
 		//System.out.println(p.resemblesRealSentence());
 		
 	}
