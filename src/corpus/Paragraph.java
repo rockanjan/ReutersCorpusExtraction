@@ -1,6 +1,14 @@
 package corpus;
 
-public class Paragraph {
+import java.io.Serializable;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Paragraph implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4319552732753623686L;
 	private String rawText;
 	public static boolean debug = false;
 	
@@ -46,6 +54,37 @@ public class Paragraph {
 		return false;
 	}
 	
+	//aggressive: 
+	
+	public boolean passesAgressiveCleaning() {
+		boolean passes = true;
+		int THRESHOLD = 5;
+		int numberOfTokens = rawText.split("\\W+").length;
+		//if first line of the paragraph does not have at least 5 tokens, whole paragraph is disregarded (probably a table header)
+		if(numberOfTokens < THRESHOLD) {
+			passes = false;
+		}
+
+		//should not start with hyphen - or (
+		if(rawText.trim().startsWith("-") || rawText.trim().startsWith("(") || rawText.trim().startsWith("*")) {
+			passes = false;
+		}
+		
+		//for example, 1), 2), a) etc
+		Pattern p = Pattern.compile("^[a-z0-9]*\\).*");
+		Matcher m = p.matcher(rawText.trim());
+		
+		if(m.matches()) {
+			passes = false;
+		}
+		//should end in either . or ? or ! or ."
+		if(! (rawText.trim().endsWith(".") || rawText.trim().endsWith("?") || rawText.trim().endsWith("!") || 
+				rawText.trim().endsWith(".\"") || rawText.trim().endsWith("?\"") || rawText.trim().endsWith("!\"")) ) {
+			passes = false;
+		}
+		return passes;
+	}
+	
 	
 	public static void main(String[] args) {
 		Paragraph.debug = true;
@@ -55,7 +94,9 @@ public class Paragraph {
 				"said Lars Schonander, head of researcher at Santander in Mexico City. " +
 				"\"You have a continuing decline in inflation, a stronger-than-expected GDP growth figure " +
 				"and the lack of any upward move in U.S. rates.\"";
+		p.rawText = "b) Future of Community policy on state aid in connection with the situation regarding ratifications of the OECD Aereement.";
+		System.out.println(p.passesAgressiveCleaning());
+		//System.out.println(p.resemblesRealSentence());
 		
-		System.out.println(p.resemblesRealSentence());
 	}
 }

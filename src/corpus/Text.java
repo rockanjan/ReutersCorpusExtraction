@@ -1,9 +1,14 @@
 package corpus;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Text {
+public class Text implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2342959193531364715L;
 	public List<Paragraph> paragraphs;
 	
 	public Text() {
@@ -13,7 +18,7 @@ public class Text {
 	public String getRawText() {
 		StringBuffer sb = new StringBuffer();
 		for(int i=0; i<paragraphs.size(); i++) {
-			if(paragraphs.get(i).resemblesRealSentence()) {
+			if(paragraphs.get(i).resemblesRealSentence() && paragraphs.get(i).passesAgressiveCleaning()) {
 				sb.append(paragraphs.get(i).getRawText());
 				sb.append("\n");
 			}

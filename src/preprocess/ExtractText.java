@@ -3,8 +3,11 @@ package preprocess;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Enumeration;
@@ -65,7 +68,7 @@ public class ExtractText {
 			System.out.println("Saving at /tmp");
 			OUT_LOCATION = "/tmp/";
 		}
-		String outFile = OUT_LOCATION + "corpus.txt";
+		String outFile = OUT_LOCATION + "corpus_clean.txt";
 		PrintWriter pw = new PrintWriter(outFile);
 		pw.print(corpus.getRawText());
 		pw.close();
