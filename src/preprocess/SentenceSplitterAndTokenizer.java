@@ -16,6 +16,7 @@ public class SentenceSplitterAndTokenizer {
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		PTBTokenizer tokenizer = new PTBTokenizer(new FileReader(filename),
 				new CoreLabelTokenFactory(), "");
+		Sentence s = new Sentence();
 		for (CoreLabel label; tokenizer.hasNext();) {
 			label = (CoreLabel) tokenizer.next();
 			String token = label.toString("value");
@@ -37,12 +38,13 @@ public class SentenceSplitterAndTokenizer {
 			if(token.equals("-RCB-")) {
 				token = "}";
 			}
-			pw.print(token);
+			s.words.add(token);
 			// is it sentence splitter?
-			if (token.equals(".") || token.equals("?") || token.equals("!")) {				
-				pw.println();
-			} else {
-				pw.print(" ");
+			if (token.equals(".") || token.equals("?") || token.equals("!")) {
+				if(s.isCleanSentence()) {
+					pw.println(s.toString());					
+				} 
+				s = new Sentence();
 			}
 		}
 		pw.close();
