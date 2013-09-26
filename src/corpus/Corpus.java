@@ -1,5 +1,9 @@
 package corpus;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,5 +26,26 @@ public class Corpus implements Serializable{
 			sb.append("\n");
 		}
 		return sb.toString();
+	}
+	
+	public void readTextFromFile(String filename) {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(filename));
+			String line;
+			while( (line = br.readLine()) != null) {
+				Paragraph p = new Paragraph();
+				p.setRawText(line);
+				Text t = new Text();
+				t.paragraphs.add(p);
+				texts.add(t);
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

@@ -24,7 +24,7 @@ import corpus.Text;
 public class ExtractText {
 	public static final String REUTER_LOCATION = "/data/REUTERS_CORPUS_1/";
 	public static final String TEST_LOCATION = "/data/test/";
-	public static String OUT_LOCATION = "/data/out/";
+	public static String OUT_LOCATION = "/data/RCV1/final/";
 	public static void main(String[] args) throws SAXException, IOException {
 		Date startTime = new Date(); 
 		System.out.println("Start Time = " + startTime);

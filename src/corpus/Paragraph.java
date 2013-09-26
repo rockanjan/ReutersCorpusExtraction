@@ -34,7 +34,7 @@ public class Paragraph implements Serializable {
 	//Percy Liang's technique (in his thesis, page 51), for filtering sentences 
 	//(a paragraph should contain at least 90% of lowercase characters and white space)
 	public boolean resemblesRealSentence() {
-		double THRESHOLD = 0.9;
+		double THRESHOLD = 0.8;
 		int allCount = rawText.length();
 		int lowercaseCount = 0;
 		for(int i=0; i<allCount; i++) {
@@ -57,7 +57,7 @@ public class Paragraph implements Serializable {
 	//aggressive: 
 	public boolean passesAgressiveCleaning() {
 		boolean passes = true;
-		int THRESHOLD = 5;
+		int THRESHOLD = 2;
 		int numberOfTokens = rawText.split("\\W+").length;
 		//if first line of the paragraph does not have at least 5 tokens, whole paragraph is disregarded (probably a table header)
 		if(numberOfTokens < THRESHOLD) {
