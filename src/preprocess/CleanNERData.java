@@ -25,7 +25,7 @@ public class CleanNERData {
 	public static void main(String[] args) throws SAXException, IOException {
 		Date startTime = new Date(); 
 		System.out.println("Start Time = " + startTime);
-		String filename = "/home/anjan/workspace/HMM/data/combined.txt.SPL";
+		String filename = "/data/onco_pos/old/wsj_ul.200k.notag.uniq";
 		
 		Corpus corpus = new Corpus();
 		corpus.readTextFromFile(filename);

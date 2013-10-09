@@ -22,8 +22,11 @@ public class Corpus implements Serializable{
 	public String getRawText() {
 		StringBuffer sb = new StringBuffer();
 		for(int i=0; i<texts.size(); i++) {
-			sb.append(texts.get(i).getRawText());
-			sb.append("\n");
+			String rawText = texts.get(i).getRawText().trim();
+			if(! rawText.isEmpty()) {
+				sb.append(rawText);
+				sb.append("\n");
+			}
 		}
 		return sb.toString();
 	}
