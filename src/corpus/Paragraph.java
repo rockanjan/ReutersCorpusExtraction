@@ -16,8 +16,27 @@ public class Paragraph implements Serializable {
 		
 	}
 	
+	public static String unEscapeString(String s){
+	    StringBuilder sb = new StringBuilder();
+	    for (int i=0; i<s.length(); i++)
+	        switch (s.charAt(i)){
+	            case '\n': sb.append("\\n"); break;
+	            case '\t': sb.append("\\t"); break;
+	            // ... rest of escape characters
+	            default: sb.append(s.charAt(i));
+	        }
+	    return sb.toString();
+	}
+	
 	public void setRawText(String rawText) {
 		this.rawText = rawText.trim();
+	}
+	
+	public void mergeMultiline() {
+		//if the paragraph has multi lines, make it single line
+		//System.out.println(unEscapeString(rawText));
+		rawText = rawText.replaceAll("\\n", " ");
+		//System.out.println(unEscapeString(rawText));
 	}
 	
 	public String getRawText() {
@@ -27,7 +46,6 @@ public class Paragraph implements Serializable {
 	public String getCleanText() {
 		//TODO: cleaning code
 		String cleanText = rawText;
-		
 		return cleanText;
 	}
 	
