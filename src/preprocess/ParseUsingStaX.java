@@ -10,7 +10,7 @@ import corpus.Corpus;
 import corpus.Text;
 
 public class ParseUsingStaX {
-	public static final String GIGAWORD_LOCATION = "/data/gigaword/nyt_eng_processed/rootadded/singleline/";
+	public static final String GIGAWORD_LOCATION = "/data/gigaword/nyt_eng_processed/rootadded/singleline/small/";
 	public static final String TEST_LOCATION = "/data/testnyt/";
 	public static String OUT_LOCATION = "/data/gigaword/nyt_eng_final/";
 
@@ -35,6 +35,7 @@ public class ParseUsingStaX {
 				}
 			}
 		}
+		System.out.println("All files read. writing...");
 		File outFolder = new File(OUT_LOCATION);
 		if (!outFolder.exists()) {
 			outFolder.mkdir();
@@ -45,7 +46,8 @@ public class ParseUsingStaX {
 		}
 		String outFile = OUT_LOCATION + "corpus_clean.txt";
 		PrintWriter pw = new PrintWriter(outFile);
-		pw.print(corpus.getRawText());
+		corpus.writeRawTextSerially(pw);
+		//pw.print(corpus.getRawText());
 		pw.close();
 		System.out.println("File written at : " + outFile);
 		Date endTime = new Date();

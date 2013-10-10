@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,15 @@ public class Corpus implements Serializable{
 			}
 		}
 		return sb.toString();
+	}
+	
+	public void writeRawTextSerially(PrintWriter pw) {
+		for(int i=0; i<texts.size(); i++) {
+			String rawText = texts.get(i).getRawText().trim();
+			if(! rawText.isEmpty()) {
+				pw.println(rawText + "\n");
+			}
+		}
 	}
 	
 	public void readTextFromFile(String filename) {
