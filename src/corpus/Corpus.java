@@ -36,7 +36,8 @@ public class Corpus implements Serializable{
 		for(int i=0; i<texts.size(); i++) {
 			String rawText = texts.get(i).getRawText().trim();
 			if(! rawText.isEmpty()) {
-				pw.println(rawText + "\n");
+				pw.println(rawText);
+				pw.println();
 			}
 		}
 	}

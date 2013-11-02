@@ -52,7 +52,7 @@ public class Paragraph implements Serializable {
 	//Percy Liang's technique (in his thesis, page 51), for filtering sentences 
 	//(a paragraph should contain at least 90% of lowercase characters and white space)
 	public boolean resemblesRealSentence() {
-		double THRESHOLD = 0.75;
+		double THRESHOLD = 0.9;
 		int allCount = rawText.length();
 		int lowercaseCount = 0;
 		for(int i=0; i<allCount; i++) {
